@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | إنشاء حساب</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            font-family: 'Segoe UI', 'Tahoma', system-ui, 'Arial', sans-serif;
+            padding: 30px 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 45px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* تنسيق موحد للفورمين */
+        .form {
+            background: rgba(15, 25, 45, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 40px 32px;
+            border-radius: 32px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            transition: all 0.35s ease;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        /* فورم التسجيل أطول بفضل زيادة عدد الحقول */
+        .form.signup {
+            min-height: 580px;
+        }
+
+        /* فورم تسجيل الدخول */
+        .form.login {
+            min-height: 420px;
+        }
+
+        .form:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 55px rgba(0, 0, 0, 0.5);
+            border-color: rgba(59, 130, 246, 0.7);
+            background: rgba(20, 30, 55, 0.9);
+        }
+
+        .form h2 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: -0.3px;
+            background: linear-gradient(120deg, #e0e7ff, #a5b4fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .form input {
+            padding: 14px 18px;
+            border: none;
+            border-radius: 28px;
+            outline: none;
+            background-color: rgba(30, 41, 59, 0.8);
+            color: #f1f5f9;
+            font-size: 15px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            font-family: inherit;
+        }
+
+        .form input:focus {
+            border-color: #3b82f6;
+            background-color: #1e293b;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .form input:hover {
+            background-color: #334155;
+            transform: translateY(-2px);
+        }
+
+        .form input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .form button {
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(95deg, #2563eb, #1e40af);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .form button:hover {
+            background: linear-gradient(95deg, #3b82f6, #2563eb);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .form button:active {
+            transform: translateY(1px);
+        }
+
+        span {
+            text-align: center;
+            display: block;
+            color: #cbd5e1;
+            font-size: 14px;
+            transition: 0.2s;
+            margin-top: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #60a5fa;
+            font-weight: 600;
+            transition: 0.2s;
+            margin-right: 6px;
+            cursor: pointer;
+        }
+
+        a:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* تنسيق خاص لتحسين المسافات في فورم التسجيل */
+        .signup input {
+            padding: 13px 18px;
+        }
+        .msg {
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: bold;
+}
+
+/* رسالة خطأ */
+        .error {
+            background-color: #ff4d4d;
+            color: white;
+}
+
+/* رسالة نجاح */
+        .success {
+            background-color: #4CAF50;
+            color: white;
+}
+
+        /* استجابة للشاشات المتوسطة */
+        @media (max-width: 800px) {
+            .container {
+                gap: 30px;
+            }
+            .form {
+                width: 320px;
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .form {
+                width: 100%;
+                max-width: 380px;
+            }
+        }
+
+        /* تزيين خفيف للحقول */
+        hr {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- فورم تسجيل الدخول -->
+    <form action="/" method="post" class="form login" id="loginForm">
+
+        <h2> أهلاً بك</h2>
+        <input type="text" placeholder="اسم المستخدم" required           name="username_login" autocomplete="username">
+        <input type="password" placeholder="كلمة المرور" required         name="password_login" autocomplete="current-password">
+        <span> لا تمتلك حساب؟ <a href="#" id="goToSignup">إنشاء حساب</a></span>
+        
+        <p class="msg {{ login_type }}">{{ login_msg }}</p>
+        <button type="submit" name="action" value="login">تسجيل الدخول</button>
+
+
+    </form>
+    
+    <!-- فورم إنشاء الحساب (طويل ومكتمل) -->
+    <form action="/" method="post" class="form signup" id="signupForm">
+        <h2> إنشاء حساب جديد</h2>
+        <input type="text" placeholder="الاسم الأول" required             name="firstname_signup">
+        <input type="text" placeholder="الاسم الأخير" required             name="lastname_signup">
+        <input type="password" placeholder="كلمة المرور" required        name="password_signup" autocomplete="new-password">
+        <input type="password" placeholder="تأكيد كلمة المرور" required    name="password_confirm">
+        <input type="email" placeholder="البريد الإلكتروني" required         name="signup_email" autocomplete="email">
+        <span> لديك حساب بالفعل؟ <a href="#" id="goToLogin">تسجيل الدخول</a></span>
+        <p class="msg {{ signup_type }}">{{ signup_msg }}</p>
+        <button type="submit" name="action" value="signup">إنشاء حساب</button>
+
+</form>
+</div>
+<script>
+
+    const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
+const goToSignup = document.getElementById('goToSignup');
+const goToLogin = document.getElementById('goToLogin');
+
+// التحكم في الفورم + الريلود بعد النجاح
+window.onload = () => {
+    const view = "{{ view }}";
+
+    if (view === "signup") {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'flex';
+    } else {
+        loginForm.style.display = 'flex';
+        signupForm.style.display = 'none';
+    }
+
+    const signupMsg = document.getElementById("signupMsg");
+
+    if (
+        signupMsg &&
+        signupMsg.textContent.includes("تم إنشاء الحساب")
+    ) {
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 2000);
+    }
+};
+
+// زر الانتقال لإنشاء حساب
+goToSignup.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'flex';
+});
+
+// زر الرجوع لتسجيل الدخول
+goToLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupForm.style.display = 'none';
+    loginForm.style.display = 'flex';
+});
+
+
+</script>
+</body>
+</html>

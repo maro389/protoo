@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكاديميه خطوه</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            color: white;
+            }
+
+/* ===== NAVBAR ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+}
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+}
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+}       
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.logout {
+    color: red;
+}
+
+/* ===== SEARCH ===== */
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+/* ===== NO RESULTS ===== */
+#noResults {
+    text-align: center;
+    color: red;
+    display: none;
+}
+
+/* ===== CONTAINER (OLD STYLE + GRID) ===== */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 40px;
+}
+
+/* ===== CARDS (OLD DESIGN) ===== */
+.cards {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.cards:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.cards img {
+    width: 90px;
+}
+
+/* ===== BUTTONS (OLD COLORS) ===== */
+button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-py {
+    background: #3776ab;
+    color: white;
+}
+
+.btn-html {
+    background: #e34c26;
+    color: white;
+}
+
+.btn-css {
+    background: #264de4;
+    color: white;
+}
+
+.btn-js {
+    background: #f7df1e;
+    color: black;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.logout-btn {
+    color: white;
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    padding: 8px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,0,0,0.4);
+}
+
+
+/* ===== RESPONSIVE (650 = 1 card / 2 cards / 3 cards) ===== */
+@media (max-width: 650px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 651px) and (max-width: 1000px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1001px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="logo">Khatwa Academy</div>
+
+    <ul class="nav-links">
+        <li><a href="/about">عن الموقع</a></li>
+        <li><a href="/account">حسابي</a></li>
+        <li><a href="/logout" class="logout-btn">تسجيل الخروج</a>
+</li>
+    </ul>
+</nav>
+
+<!-- ===== SEARCH ===== -->
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن كورس...">
+</div>
+
+<!-- ===== NO RESULTS ===== -->
+<div id="noResults">❌ لا توجد نتائج</div>
+
+<!-- ===== CONTAINER ===== -->
+<div class="container">
+
+    <div class="cards">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+        <h2>Python بايثون</h2>
+        <p>لغة برمجة قوية وسهلة للذكاء الاصطناعي وتطوير الويب</p>
+        <button class="btn-py"onclick="pagePY()" >الدخول للكورس</button>
+    </div>
+
+    <div class="cards">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
+        <h2>HTML اتش تي ام ال</h2>
+        <p>لغة بناء صفحات الويب وهي الأساس لأي موقع</p>
+        <button class="btn-html" onclick="pageHT()" >الدخول للكورس</button>
+    </div>
+
+    <div class="cards">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
+        <h2>CSS سي اس اس</h2>
+        <p>لغة تنسيق وتجميل صفحات الويب</p>
+        <button class="btn-css" onclick="pageCS()" >الدخول للكورس</button>
+    </div>
+
+    <div class="cards">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
+        <h2>JavaScript جافا سكريبت</h2>
+        <p>لغة تجعل المواقع تفاعلية وديناميكية</p>
+        <button class="btn-js" onclick="pageJS()" >الدخول للكورس</button>
+    </div>
+
+</div>
+
+
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".cards");
+const noResults = document.getElementById("noResults");
+
+searchInput.addEventListener("input", function () {
+    let value = this.value.trim().toLowerCase();
+    let found = false;
+
+    cards.forEach(card => {
+        let text = card.textContent.toLowerCase();
+
+        if (text.includes(value)) {
+            card.style.display = "block";
+            found = true;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    noResults.style.display = (!found && value !== "") ? "block" : "none";
+});
+
+function pagePY(){window.location.href="PY.html"}
+function pageHT(){window.location.href="HT.html"}
+function pageCS(){window.location.href="CS.html"}
+function pageJS(){window.location.href="JS.html"}
+</script>
+</body>
+</html>
