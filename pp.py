@@ -2,6 +2,7 @@ from flask import Flask, render_template, render_template_string, request, sessi
 import sqlite3 as sq
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+
 app = Flask(__name__)
 app.secret_key = "my_secret_key_123"
 
@@ -42,7 +43,6 @@ HTML = open('index.html', encoding='utf-8').read()
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
-    # لو المستخدم مسجل دخول يروح مباشرة
     if 'user' in session:
         return redirect('/home')
 
@@ -58,15 +58,12 @@ def home():
     if request.method == 'POST':
         action = request.form.get('action')
 
-        # ================= LOGIN =================
+        # LOGIN
         if action == 'login':
             email = request.form['username_login']
             password = request.form['password_login']
 
-            cursor.execute(
-                'SELECT password FROM users WHERE email = ?',
-                (email,)
-            )
+            cursor.execute('SELECT password FROM users WHERE email = ?', (email,))
             user = cursor.fetchone()
 
             if not user or not check_password_hash(user[0], password):
@@ -77,7 +74,7 @@ def home():
                 conn.close()
                 return redirect('/home')
 
-        # ================= SIGNUP =================
+        # SIGNUP
         elif action == 'signup':
             view = "signup"
 
@@ -102,7 +99,6 @@ def home():
                     conn.commit()
                     conn.close()
 
-                    # ❌ مهم: مفيش تحويل بعد signup
                     signup_msg = "تم إنشاء الحساب بنجاح 👌 سجل دخولك الآن"
                     signup_type = "success"
 
@@ -127,29 +123,27 @@ def home():
 def dashboard():
     if 'user' not in session:
         return redirect('/')
-
     return render_template('page2.html', user=session['user'])
-
-
 
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+
 @app.route('/account')
 def account():
     return render_template('account.html')
+
 
 # ================= LOGOUT =================
 @app.route('/logout')
 def logout():
     session.pop('user', None)
     return redirect('/')
-# ================= RUN =================
-if __name__ == "__main__":
-    app.run(debug=True)
 
+
+# ================= RUN (IMPORTANT) =================
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
